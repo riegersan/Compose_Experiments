@@ -7,18 +7,36 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.tooling.preview.Preview
 import com.riegersan.composeexperiments.ui.theme.ComposeExperimentsTheme
 
+
 class MainActivity : ComponentActivity() {
+
+    val selectedCar: MutableState<List<Car?>> = mutableStateOf(listOf())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeExperimentsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
+                ChipGroup(
+                    cars = getAllCars(),
+                    selectedCars = selectedCar.value,
+                    onSelectedChanged = {
+                        val oldList: MutableList<Car?> = selectedCar.value.toMutableList()
+                        val carFromString = getCar(it)
+
+                        if(oldList.contains(carFromString)){
+                            oldList.remove(carFromString)
+                        }else{
+                            oldList.add(carFromString)
+                        }
+
+                        selectedCar.value = oldList
+                    }
+                )
             }
         }
     }
