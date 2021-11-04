@@ -12,17 +12,41 @@ import com.riegersan.composeexperiments.chipgroup.Car
 
 @Preview(showBackground = true)
 @Composable
-fun ChipGroup(
+fun ChipGroupMultiSelection(
+    modifier: Modifier = Modifier,
     cars: List<Car> = listOf(*Car.values()),
     selectedCars: List<Car?> = listOf(),
     onSelectedChanged: (String) -> Unit = {},
 ) {
-    Column(modifier = Modifier.padding(8.dp)) {
+    Column(modifier = modifier) {
         LazyRow {
-            items(cars) {
+            items(cars) { item ->
                 Chip(
-                    name = it.value,
-                    isSelected = selectedCars.contains(it),
+                    name = item.value,
+                    isSelected = selectedCars.contains(item),
+                    onSelectionChanged = {
+                        onSelectedChanged(it)
+                    },
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ChipGroupSingleSelection(
+    modifier: Modifier = Modifier,
+    cars: List<Car> = listOf(*Car.values()),
+    selectedCar: Car? = null,
+    onSelectedChanged: (String) -> Unit = {},
+) {
+    Column(modifier = modifier) {
+        LazyRow {
+            items(cars) { item ->
+                Chip(
+                    name = item.value,
+                    isSelected = selectedCar == item,
                     onSelectionChanged = {
                         onSelectedChanged(it)
                     },

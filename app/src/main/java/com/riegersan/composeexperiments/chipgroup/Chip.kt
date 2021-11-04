@@ -15,15 +15,16 @@ import androidx.compose.ui.unit.dp
 @Preview(showBackground = true)
 @Composable
 fun Chip(
+    modifier: Modifier = Modifier,
     name: String = "Chip",
-    isSelected: Boolean = false,
+    isSelected: Boolean = true,
     onSelectionChanged: (String) -> Unit = {},
 ) {
     Surface(
-        modifier = Modifier.padding(4.dp),
+        modifier = modifier.padding(4.dp),
         elevation = 8.dp,
         shape = MaterialTheme.shapes.medium,
-        color = if (isSelected) Color.LightGray else MaterialTheme.colors.primary
+        color = if (isSelected) MaterialTheme.colors.primary else Color.LightGray
     ) {
         Row(modifier = Modifier
             .toggleable(
