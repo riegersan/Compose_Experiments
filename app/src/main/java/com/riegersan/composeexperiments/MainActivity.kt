@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.riegersan.composeexperiments.chipgroup.Car
@@ -52,7 +53,7 @@ fun DefaultPreview(
 
         Text(
             style = MaterialTheme.typography.body1,
-            text = "ChipGroup Multiple Selection"
+            text = stringResource(R.string.chip_group_multi_selection)
         )
 
         Spacer(modifier = Modifier.padding(top = 8.dp))
@@ -78,7 +79,7 @@ fun DefaultPreview(
 
         Text(
             style = MaterialTheme.typography.body1,
-            text = "ChipGroup Single Selection"
+            text = stringResource(R.string.chip_group_single_selection)
         )
 
         Spacer(modifier = Modifier.padding(top = 8.dp))
