@@ -3,6 +3,7 @@ package com.riegersan.composeexperiments
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,16 +23,14 @@ import com.riegersan.composeexperiments.ui.theme.ComposeExperimentsTheme
 
 class MainActivity : ComponentActivity() {
 
-    val selectedCars: MutableState<List<Car?>> = mutableStateOf(listOf())
-    val selectedCar: MutableState<Car?> = mutableStateOf(Car.AUDI)
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeExperimentsTheme {
                 DefaultPreview(
-                    selectedCar = selectedCar,
-                    selectedCars = selectedCars
+                    viewModel
                 )
             }
         }
@@ -42,8 +41,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview(
-    selectedCar: MutableState<Car?> = mutableStateOf(Car.AUDI),
-    selectedCars: MutableState<List<Car?>> = mutableStateOf(listOf(*Car.values()))
+    viewModel: MainViewModelInterface = MainViewModel.composeViewModel
 ) {
     Column(
         modifier = Modifier
@@ -60,9 +58,9 @@ fun DefaultPreview(
 
         ChipGroupMultiSelection(
             cars = listOf(*Car.values()),
-            selectedCars = selectedCars.value,
+            selectedCars = viewModel.selectedCars.value,
             onSelectedChanged = { changedSelection ->
-                val oldList: MutableList<Car?> = selectedCars.value.toMutableList()
+                val oldList: MutableList<Car?> = viewModel.selectedCars.value.toMutableList()
                 val carFromString = Car.valueOf(changedSelection)
 
                 if (oldList.contains(carFromString)) {
@@ -71,7 +69,7 @@ fun DefaultPreview(
                     oldList.add(carFromString)
                 }
 
-                selectedCars.value = oldList
+                viewModel.selectedCars.value = oldList
             }
         )
 
@@ -86,9 +84,9 @@ fun DefaultPreview(
 
         ChipGroupSingleSelection(
             cars = listOf(*Car.values()),
-            selectedCar = selectedCar.value,
+            selectedCar = viewModel.selectedCar.value,
             onSelectedChanged = { changedSelection ->
-                selectedCar.value = Car.valueOf(changedSelection)
+                viewModel.selectedCar.value = Car.valueOf(changedSelection)
             }
         )
     }
