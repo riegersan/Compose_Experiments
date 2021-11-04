@@ -30,6 +30,6 @@ class MainViewModel: ViewModel(), MainViewModelInterface {
         }
     }
 
-    override val selectedCar: MutableState<Car?> = mutableStateOf(null)
-    override val selectedCars: MutableState<List<Car?>> = mutableStateOf(listOf())
+    override val selectedCar: MutableState<Car?> = mutableStateOf(Car.AUDI)
+    override val selectedCars: MutableState<List<Car?>> = mutableStateOf(listOf(Car.VW))
 }
