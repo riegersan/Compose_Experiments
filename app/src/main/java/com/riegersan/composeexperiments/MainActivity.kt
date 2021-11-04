@@ -85,7 +85,7 @@ fun DefaultPreview(
 
         ChipGroupSingleSelection(
             cars = listOf(*Car.values()),
-            selectedCar = Car.AUDI,
+            selectedCar = selectedCar.value,
             onSelectedChanged = { changedSelection ->
                 selectedCar.value = Car.valueOf(changedSelection)
             }

@@ -16,9 +16,14 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Chip(
     modifier: Modifier = Modifier,
+    onSelectionChanged: (String) -> Unit = {},
     name: String = "Chip",
     isSelected: Boolean = true,
-    onSelectionChanged: (String) -> Unit = {},
+    content: @Composable () -> Unit = {Text(
+        text = name,
+        color = Color.White,
+        modifier = Modifier.padding(8.dp)
+    )}
 ) {
     Surface(
         modifier = modifier.padding(4.dp),
@@ -34,11 +39,7 @@ fun Chip(
                 }
             )
         ) {
-            Text(
-                text = name,
-                color = Color.White,
-                modifier = Modifier.padding(8.dp)
-            )
+            content()
         }
     }
 }
