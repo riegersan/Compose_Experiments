@@ -17,7 +17,7 @@ import com.riegersan.composeexperiments.chipgroup.Car
 fun ChipGroupMultiSelection(
     modifier: Modifier = Modifier,
     cars: List<Car> = listOf(*Car.values()),
-    selectedCars: List<Car?> = listOf(),
+    selectedCars: List<Car?> = listOf(Car.AUDI),
     onSelectedChanged: (String) -> Unit = {},
 ) {
     Column(modifier = modifier) {
@@ -40,7 +40,7 @@ fun ChipGroupMultiSelection(
 fun ChipGroupSingleSelection(
     modifier: Modifier = Modifier,
     cars: List<Car> = listOf(*Car.values()),
-    selectedCar: Car? = null,
+    selectedCar: Car? = Car.AUDI,
     onSelectedChanged: (String) -> Unit = {},
 ) {
     Column(modifier = modifier) {
