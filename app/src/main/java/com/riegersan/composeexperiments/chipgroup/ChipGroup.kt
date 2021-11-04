@@ -8,11 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.riegersan.composeexperiments.chipgroup.Car
 
 @Preview(showBackground = true)
 @Composable
 fun ChipGroup(
-    cars: List<Car> = getAllCars(),
+    cars: List<Car> = listOf(*Car.values()),
     selectedCars: List<Car?> = listOf(),
     onSelectedChanged: (String) -> Unit = {},
 ) {

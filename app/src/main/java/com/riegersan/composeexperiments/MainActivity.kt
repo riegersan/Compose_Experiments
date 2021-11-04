@@ -3,13 +3,12 @@ package com.riegersan.composeexperiments
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.tooling.preview.Preview
+import com.riegersan.composeexperiments.chipgroup.Car
 import com.riegersan.composeexperiments.ui.theme.ComposeExperimentsTheme
 
 
@@ -22,17 +21,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeExperimentsTheme {
                 ChipGroup(
-                    cars = getAllCars(),
+                    cars = listOf(*Car.values()),
                     selectedCars = selectedCar.value,
                     onSelectedChanged = {
                         val oldList: MutableList<Car?> = selectedCar.value.toMutableList()
-                        val carFromString = getCar(it)
+                        val carFromString = Car.valueOf(it)
 
                         if(oldList.contains(carFromString)){
                             oldList.remove(carFromString)
                         }else{
                             oldList.add(carFromString)
                         }
+
 
                         selectedCar.value = oldList
                     }
