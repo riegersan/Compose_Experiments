@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Compose Experiments"
 include ':app'
+include ':simpleelments'
